@@ -21,6 +21,6 @@ class RecordGetter:
 		line = self.getLine(lineNum)
 		fields = line.split(",")
 
-		record = {config.getShardKey() : fields[0], config.getReshardKey() : fields[3], config.getChangeColumn() : fields[2]}
+		record = {config.getShardKey() : fields[0].replace("\n", ""), config.getReshardKey() : fields[3].replace("\n", ""), config.getChangeColumn() : fields[2].replace("\n", "")}
 
 		return record

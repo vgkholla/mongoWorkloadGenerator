@@ -9,6 +9,7 @@ from pymongo import MongoClient
 
 from configGetter import ConfigGetter
 from dbOpsHandler import DBOpsHandler
+from recordPreloader import RecordPreloader
 from recordGetter import RecordGetter
 from uniformDistributionGenerator import UniformDistributionGenerator
 
@@ -41,12 +42,13 @@ config.printConfig()
 
 client = getMongoClient(config)
 dbOpsHandler = DBOpsHandler(client, config)
+recordPreloader = RecordPreloader(config)
 extraRecordGetter =  RecordGetter(config)
 
 distribution = config.getDistribution()
 workloadGenerator = None
 if distribution == "uniform":
-	workloadGenerator = UniformDistributionGenerator(client, config, dbOpsHandler, extraRecordGetter)
+	workloadGenerator = UniformDistributionGenerator(client, config, dbOpsHandler, recordPreloader, extraRecordGetter)
 else:
 	print "Unrecognized distribution - " + distribution
 	exit()

@@ -11,6 +11,7 @@ class ConfigGetter:
 		self.shardKey = ""
 		self.reshardKey = ""
 		self.changeColumn = ""
+		self.initRecordsFilePath = ""
 		self.extraRecordsFilePath = ""
 		self.distribution = "uniform"
 
@@ -46,6 +47,8 @@ class ConfigGetter:
 					self.reshardKey = value
 				elif key == "changeColumn":
 					self.changeColumn = value
+				elif key == "initRecordsFilePath":
+					self.initRecordsFilePath = os.path.abspath(value)
 				elif key == "extraRecordsFilePath":
 					self.extraRecordsFilePath = os.path.abspath(value)
 				elif key == "distribution":
@@ -81,6 +84,9 @@ class ConfigGetter:
 	def getChangeColumn(self):
 		return self.changeColumn
 
+	def getInitRecordsFilePath(self):
+		return self.initRecordsFilePath
+
 	def getExtraRecordsFilePath(self):
 		return self.extraRecordsFilePath
 
@@ -99,5 +105,6 @@ class ConfigGetter:
 		print "Shard key : " + self.getShardKey()
 		print "Reshard key : " + self.getReshardKey()
 		print "Change column : " + self.getChangeColumn()
+		print "Init records file path : " + self.getInitRecordsFilePath()
 		print "Extra records file path : " + self.getExtraRecordsFilePath()
 		print "Distribution : " + self.getDistribution()

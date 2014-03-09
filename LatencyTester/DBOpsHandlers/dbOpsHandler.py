@@ -36,7 +36,7 @@ class DBOpsHandler:
 
 		elapsedTime = endTime - startTime
 		
-		print "Insert: " + str(elapsedTime)
+		print "Insert latency: " + str(elapsedTime)
 
 	def readRecord(self, query):
 		collection = self.getCollection()
@@ -52,7 +52,7 @@ class DBOpsHandler:
 		elapsedTime = endTime - startTime
 		if record == None:
 			elapsedTime = -100
-		print "Read: " + str(elapsedTime)
+		print "Read latency: " + str(elapsedTime)
 
 	def updateRecord(self, query, update):
 		collection = self.getCollection()
@@ -67,4 +67,4 @@ class DBOpsHandler:
 
 		elapsedTime = endTime - startTime
 		
-		print "Update: " + str(elapsedTime)
+		print "Update latency: " + str(elapsedTime)

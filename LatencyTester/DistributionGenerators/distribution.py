@@ -3,13 +3,14 @@ import time
 import random
 class DistributionGenerator(object):
 
-	def __init__(self, client, config, dbOpsHandler, extraRecordGetter):
+	def __init__(self, client, config, dbOpsHandler, recordPreloader, extraRecordGetter):
 		self.client = client
 		self.config = config
 		self.dbOpsHandler = dbOpsHandler
+		self.recordPreloader = recordPreloader
 		self.extraRecordGetter = extraRecordGetter
-		self.mapping = dict()
-		self.setNextLineNum(1);
+		self.mapping = self.getRecordPreloader().initMapping()
+		self.setNextLineNum(0);
 
 	def getClient(self):
 		return self.client
@@ -19,6 +20,9 @@ class DistributionGenerator(object):
 
 	def getDBOpsHandler(self):
 		return self.dbOpsHandler
+
+	def getRecordPreloader(self):
+		return self.recordPreloader
 
 	def getExtraRecordGetter(self):
 		return self.extraRecordGetter
@@ -86,7 +90,7 @@ class DistributionGenerator(object):
 
 	def getUpdateQuery(self, record):
 		change = dict(self.stripToIndices(record))
-		change[self.getConfig().getChangeColumn()] = "$1"
+		change[self.getConfig().getChangeColumn()] = "10"
 		update = {"$set" : change}
 
 		return update
