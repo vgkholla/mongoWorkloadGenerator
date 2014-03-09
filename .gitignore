@@ -1,6 +1,9 @@
 # OS x
 *.DS_STORE
 
+#sublime
+*.sublime-*
+
 *.py[cod]
 
 # C extensions
