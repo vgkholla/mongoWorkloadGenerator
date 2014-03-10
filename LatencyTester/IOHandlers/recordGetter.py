@@ -21,6 +21,15 @@ class RecordGetter:
 		line = self.getLine(lineNum)
 		fields = line.split(",")
 
-		record = {config.getShardKey() : fields[0].replace("\n", ""), config.getReshardKey() : fields[3].replace("\n", ""), config.getChangeColumn() : fields[2].replace("\n", "")}
+		shardField = fields[0].replace("\n", "")
+		reshardField = fields[3].replace("\n", "")
+
+		if shardField.isdigit():
+			shardField = int(shardField)
+
+		if reshardField.isdigit():
+			reshardField = int(reshardField)
+
+		record = {config.getShardKey() : shardField, config.getReshardKey() : reshardField, config.getChangeColumn() : fields[2].replace("\n", "")}
 
 		return record

@@ -15,7 +15,15 @@ class RecordPreloader:
 		with open(initRecordsFile) as f:
 			for line in f:
 				fields = line.split(",")
-				record = {config.getShardKey() : fields[0].replace("\n", ""), config.getReshardKey() : fields[1].replace("\n", "")}
+				
+				shardField = fields[0].replace("\n", "")
+				reshardField = fields[1].replace("\n", "")
+				if shardField.isdigit():
+					shardField = int(shardField)
+				if reshardField.isdigit():
+					reshardField = int(reshardField)
+				
+				record = {config.getShardKey() : shardField, config.getReshardKey() : reshardField}
 				insertedRecords[recordNum] = record
 				recordNum += 1
 

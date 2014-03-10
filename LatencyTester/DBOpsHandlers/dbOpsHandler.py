@@ -1,4 +1,5 @@
 import time
+import pymongo
 
 class DBOpsHandler:
 
@@ -30,9 +31,9 @@ class DBOpsHandler:
 		try:
 			returnID = collection.insert(record)
 			endTime = time.time()
-		except OperationFailure:
+		except pymongo.errors.OperationFailure:
 			print "Insert Failure"
-			endTime = startTime
+			endTime = startTime - 100
 
 		elapsedTime = endTime - startTime
 		
@@ -45,7 +46,7 @@ class DBOpsHandler:
 		try:
 			record = collection.find_one(query)
 			endTime = time.time()
-		except OperationFailure:
+		except pymongo.errors.OperationFailure:
 			print "Read Failure"
 			endTime = startTime
 
@@ -56,14 +57,13 @@ class DBOpsHandler:
 
 	def updateRecord(self, query, update):
 		collection = self.getCollection()
-		
 		startTime = time.time()
 		try:
 			returnStatus = collection.update(query, update)
 			endTime = time.time()
-		except OperationFailure:
+		except pymongo.errors.OperationFailure:
 			print "Update Failure"
-			endTime = startTime
+			endTime = startTime - 100
 
 		elapsedTime = endTime - startTime
 		

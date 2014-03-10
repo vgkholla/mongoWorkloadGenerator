@@ -1,5 +1,5 @@
 import random
-from distribution import DistributionGenerator
+from distributionGenerator import DistributionGenerator
 class UniformDistributionGenerator(DistributionGenerator):
 
 	def __init__(self, client, config, dbOpsHandler, recordPreloader, extraRecordGetter):
