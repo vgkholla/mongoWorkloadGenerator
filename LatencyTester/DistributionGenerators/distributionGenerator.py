@@ -34,7 +34,7 @@ class DistributionGenerator(object):
 		else:
 			numOpsPerSec = self.getConfig().getNumOpsPerSec()
 			if numOpsPerSec <= opsThisRound:
-				print "Performed " + str(numOpsPerSec) + " ops this round.. Waiting for the next round to begin"
+				#print "Performed " + str(numOpsPerSec) + " ops this round.. Waiting for the next round to begin"
 				return False
 			self.incrementOpsThisRound()
 

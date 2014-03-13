@@ -16,8 +16,8 @@ class RecordPreloader:
 			for line in f:
 				fields = line.split(",")
 				
-				shardField = fields[0].replace("\n", "")
-				reshardField = fields[1].replace("\n", "")
+				shardField = fields[0].replace("\n", "").replace("\"", "")
+				reshardField = fields[1].replace("\n", "").replace("\"", "")
 				if shardField.isdigit():
 					shardField = int(shardField)
 				if reshardField.isdigit():
