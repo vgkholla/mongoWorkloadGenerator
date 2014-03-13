@@ -11,7 +11,7 @@ class RecordPreloader:
 		config = self.getConfig()
 		initRecordsFile = config.getInitRecordsFilePath()
 		insertedRecords = dict()
-		recordNum = 0
+		recordNum = config.getRecordPreloadStart()
 		with open(initRecordsFile) as f:
 			for line in f:
 				fields = line.split(",")

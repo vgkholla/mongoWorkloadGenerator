@@ -7,7 +7,8 @@ class ConfigGetter:
 		self.collectionName = ""
 		self.rangeStart = 0
 		self.rangeEnd = 0
-		self.sleepTime = 0
+		self.recordPreloadStart = 0
+		self.numOpsPerSec = 0
 		self.shardKey = ""
 		self.reshardKey = ""
 		self.changeColumn = ""
@@ -39,8 +40,10 @@ class ConfigGetter:
 					self.rangeStart = value
 				elif key == "rangeEnd":
 					self.rangeEnd = value
-				elif key == "sleepTime":
-					self.sleepTime = value
+				elif key == "recordPreloadStart":
+					self.recordPreloadStart = value
+				elif key == "numOpsPerSec":
+					self.numOpsPerSec = value
 				elif key == "shardKey":
 					self.shardKey = value
 				elif key == "reshardKey":
@@ -72,8 +75,11 @@ class ConfigGetter:
 	def getRangeEnd(self):
 		return int(self.rangeEnd)
 
-	def getSleepTime(self):
-		return int(self.sleepTime)
+	def getRecordPreloadStart(self):
+		return int(self.recordPreloadStart)
+
+	def getNumOpsPerSec(self):
+		return int(self.numOpsPerSec)
 
 	def getShardKey(self):
 		return self.shardKey
@@ -99,9 +105,10 @@ class ConfigGetter:
 		print "Router port : " + str(self.getRouterPort())
 		print "DB Name : " + self.getDbName()
 		print "Collection Name : " + self.getCollectionName()
-		print "Range start : " + str(self.getRouterPort())
-		print "Range end : " + str(self.getRouterPort())
-		print "Sleep time : " + str(self.getRouterPort())
+		print "Range start : " + str(self.getRangeStart())
+		print "Range end : " + str(self.getRangeEnd())
+		print "Record preload start: " + str(self.getRecordPreloadStart())
+		print "Num Ops/Sec : " + str(self.getNumOpsPerSec())
 		print "Shard key : " + self.getShardKey()
 		print "Reshard key : " + self.getReshardKey()
 		print "Change column : " + self.getChangeColumn()

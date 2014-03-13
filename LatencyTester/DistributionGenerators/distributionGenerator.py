@@ -12,6 +12,34 @@ class DistributionGenerator(object):
 		self.mapping = self.getRecordPreloader().initMapping()
 		self.setNextLineNum(0);
 
+		self.currentRound = int(time.time())
+		self.opsThisRound = 0
+
+	def getCurrentRound(self):
+		return self.currentRound
+
+	def getOpsThisRound(self):
+		return self.opsThisRound
+
+	def incrementOpsThisRound(self, increment = 1):
+		self.opsThisRound += increment
+
+	def canRunMoreOpsThisRound(self):
+		roundNum = int(time.time())
+		currentRound = self.getCurrentRound()
+		opsThisRound = self.getOpsThisRound()
+		if roundNum > currentRound:
+			self.opsThisRound = 0
+			self.currentRound = roundNum
+		else:
+			numOpsPerSec = self.getConfig().getNumOpsPerSec()
+			if numOpsPerSec <= opsThisRound:
+				print "Performed " + str(numOpsPerSec) + " ops this round.. Waiting for the next round to begin"
+				return False
+			self.incrementOpsThisRound()
+
+		return True
+
 	def getClient(self):
 		return self.client
 
@@ -97,14 +125,14 @@ class DistributionGenerator(object):
 		#return update
 
 	def applyWorkload(self):
-		config = self.getConfig()
-		sleepTime = config.getSleepTime()
-
 		while True:
-			op, record = self.getOpAndRecord()
-			print ("Op is " + op + ". Record is " + str(record))
-			self.applyOperation(op, record)
-			time.sleep(float(sleepTime/1000000))
+			if self.canRunMoreOpsThisRound():
+				op, record = self.getOpAndRecord()
+				print ("Op is " + op + ". Record is " + str(record))
+				self.applyOperation(op, record)
+			else:
+				time.sleep(0.01) #sleep for 10ms to avoid busy waiting
+			
 
 	def applyOperation(self, op, record):
 		dbOpsHandler = self.getDBOpsHandler()

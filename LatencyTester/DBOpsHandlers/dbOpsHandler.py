@@ -1,4 +1,5 @@
 import time
+import datetime
 import pymongo
 
 class DBOpsHandler:
@@ -37,7 +38,8 @@ class DBOpsHandler:
 
 		elapsedTime = endTime - startTime
 		
-		print "Insert latency: " + str(elapsedTime)
+		dt = datetime.datetime.fromtimestamp(time.time())
+		print "Insert latency: " + str(dt) + ", " + str(elapsedTime)
 
 	def readRecord(self, query):
 		collection = self.getCollection()
@@ -53,7 +55,9 @@ class DBOpsHandler:
 		elapsedTime = endTime - startTime
 		if record == None:
 			elapsedTime = -100
-		print "Read latency: " + str(elapsedTime)
+
+		dt = datetime.datetime.fromtimestamp(time.time())
+		print "Read latency: " + str(dt) + ", " + str(elapsedTime)
 
 	def updateRecord(self, query, update):
 		collection = self.getCollection()
@@ -67,4 +71,5 @@ class DBOpsHandler:
 
 		elapsedTime = endTime - startTime
 		
-		print "Update latency: " + str(elapsedTime)
+		dt = datetime.datetime.fromtimestamp(time.time())
+		print "Update latency: " + str(dt) + ", " + str(elapsedTime)
