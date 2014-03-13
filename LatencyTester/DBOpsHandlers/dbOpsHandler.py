@@ -45,6 +45,7 @@ class DBOpsHandler:
 		collection = self.getCollection()
 		
 		startTime = time.time()
+		record = None
 		try:
 			record = collection.find_one(query)
 			endTime = time.time()
