@@ -115,13 +115,12 @@ class DistributionGenerator(object):
 			else:
 				self.insertKeyInMapping(recordNum, self.stripToIndices(record))
 		else:
-			recordNum += 1
-			while recordNum > numKeysInMapping:
+			while recordNum < 0 or recordNum >= numKeysInMapping:
 				recordNum = self.getNextIndex()
 
 			op = ""
 			record = None
-			value = self.getKeyInMapping(numKeysInMapping - recordNum)
+			value = self.getKeyInMapping(recordNum)
 			
 			tieBreaker = int(random.uniform(0,100000))
 		 	if tieBreaker % 2 == 0:

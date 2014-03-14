@@ -33,7 +33,7 @@ class DBOpsHandler:
 			returnID = collection.insert(record)
 			endTime = time.time()
 		except pymongo.errors.OperationFailure:
-			print "Insert Failure"
+			print "Operation Failure: Insert Failure"
 			endTime = startTime - 100
 
 		elapsedTime = endTime - startTime
@@ -50,13 +50,14 @@ class DBOpsHandler:
 			record = collection.find_one(query)
 			endTime = time.time()
 		except pymongo.errors.OperationFailure:
-			print "Read Failure"
+			print "Operation Failure: Read Failure"
 			endTime = startTime
 
 		elapsedTime = endTime - startTime
 		if record == None:
 			elapsedTime = -100
 
+		print "Read output: " + str(record)
 		dt = datetime.datetime.fromtimestamp(time.time())
 		print "Read latency: " + str(dt) + ", " + str(elapsedTime)
 
@@ -67,7 +68,7 @@ class DBOpsHandler:
 			returnStatus = collection.update(query, update)
 			endTime = time.time()
 		except pymongo.errors.OperationFailure:
-			print "Update Failure"
+			print "Operation Failure: Update Failure"
 			endTime = startTime - 100
 
 		elapsedTime = endTime - startTime

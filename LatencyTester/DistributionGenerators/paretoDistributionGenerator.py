@@ -23,9 +23,9 @@ class ParetoDistributionGenerator(DistributionGenerator):
 		currentIndex = self.getCurrentIndex()
 
 		if currentIndex == 0:
-			lower = 1
+			lower = 0
 			shape = 2   # the distribution shape parameter, also known as `a` or `alpha`
-			size = 100000
+			size = 1000000
 			upper = self.getConfig().getRangeEnd()
 
 			x = numpy.random.pareto(shape, size) + lower
@@ -33,9 +33,12 @@ class ParetoDistributionGenerator(DistributionGenerator):
 
 			self.setValues(x)
 		
-
+		numKeysInMapping = self.getNumKeysInMapping()
 		values = self.getValues()
 		value = int(values[currentIndex])
+
+
+
 		self.incrementCurrentIndex()
 		return value
 
