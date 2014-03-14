@@ -62,6 +62,9 @@ class DistributionGenerator(object):
 		mapping = self.getMapping()
 		return mapping.get(key, None)
 
+	def getNumKeysInMapping(self):
+		return len(self.getMapping())
+
 	def getNextLineNum(self):
 		return self.nextLineNum
 
@@ -97,15 +100,26 @@ class DistributionGenerator(object):
 
 
 	def getOpAndRecord(self):
-		recordNum = self.getNextIndex()
-		op = ""
-		record = None
-		value = self.getKeyInMapping(recordNum)
-		if value == None:
+		numKeysInMapping = self.getNumKeysInMapping()
+		recordNum = numKeysInMapping
+
+		insertPercentage = 10
+		insertDecide = int(random.uniform(0,100))
+
+		if insertDecide < insertPercentage:
 			op = "i"
 			record = self.getNextRecordToInsert()
+			
 			self.insertKeyInMapping(recordNum, self.stripToIndices(record))
 		else:
+			recordNum += 1
+			while recordNum > numKeysInMapping:
+				recordNum = self.getNextIndex()
+
+			op = ""
+			record = None
+			value = self.getKeyInMapping(numKeysInMapping - recordNum)
+			
 			tieBreaker = int(random.uniform(0,100000))
 		 	if tieBreaker % 2 == 0:
 		 		op = "r"
@@ -129,7 +143,7 @@ class DistributionGenerator(object):
 			if self.canRunMoreOpsThisRound():
 				op, record = self.getOpAndRecord()
 				print ("Op is " + op + ". Record is " + str(record))
-				self.applyOperation(op, record)
+				#self.applyOperation(op, record)
 			else:
 				time.sleep(0.01) #sleep for 10ms to avoid busy waiting
 			

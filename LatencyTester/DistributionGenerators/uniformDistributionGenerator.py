@@ -7,8 +7,8 @@ class UniformDistributionGenerator(DistributionGenerator):
 
 	def getNextIndex(self):
 		config = self.getConfig()
-		start = config.getRangeStart()
-		end = config.getRangeEnd()
+		start = 1
+		end = self.getNumKeysInMapping()
 
 		return int(random.uniform(start, end))
 

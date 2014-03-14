@@ -23,7 +23,7 @@ class ParetoDistributionGenerator(DistributionGenerator):
 		currentIndex = self.getCurrentIndex()
 
 		if currentIndex == 0:
-			lower = self.getConfig().getRangeStart()
+			lower = 1
 			shape = 2   # the distribution shape parameter, also known as `a` or `alpha`
 			size = 100000
 			upper = self.getConfig().getRangeEnd()

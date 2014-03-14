@@ -1,5 +1,5 @@
 # OS x
-*.DS_STORE
+*.DS_Store
 
 #sublime
 *.sublime-*
