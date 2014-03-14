@@ -21,8 +21,8 @@ class RecordGetter:
 		line = self.getLine(lineNum)
 		fields = line.split(",")
 
-		shardField = fields[0].replace("\n", "")
-		reshardField = fields[3].replace("\n", "")
+		shardField = fields[0].replace("\n", "").replace("\"", "")
+		reshardField = fields[3].replace("\n", "").replace("\"", "")
 
 		if shardField.isdigit():
 			shardField = int(shardField)
@@ -30,6 +30,6 @@ class RecordGetter:
 		if reshardField.isdigit():
 			reshardField = int(reshardField)
 
-		record = {config.getShardKey() : shardField, config.getReshardKey() : reshardField, config.getChangeColumn() : fields[2].replace("\n", "")}
+		record = {config.getShardKey() : shardField, config.getReshardKey() : reshardField, config.getChangeColumn() : fields[2].replace("\n", "").replace("\"", "")}
 
 		return record
