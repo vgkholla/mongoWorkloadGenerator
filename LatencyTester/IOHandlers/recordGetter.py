@@ -19,6 +19,9 @@ class RecordGetter:
 	def getRecordAtLine(self, lineNum):
 		config = self.getConfig()
 		line = self.getLine(lineNum)
+		if line == None:
+			return None
+
 		fields = line.split(",")
 
 		shardField = fields[0].replace("\n", "").replace("\"", "")

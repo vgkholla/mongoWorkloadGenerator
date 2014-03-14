@@ -109,8 +109,11 @@ class DistributionGenerator(object):
 		if insertDecide < insertPercentage:
 			op = "i"
 			record = self.getNextRecordToInsert()
-			
-			self.insertKeyInMapping(recordNum, self.stripToIndices(record))
+			if record == None:
+				print("No more keys to insert!")
+				op, record = self.getOpAndRecord()
+			else:
+				self.insertKeyInMapping(recordNum, self.stripToIndices(record))
 		else:
 			recordNum += 1
 			while recordNum > numKeysInMapping:
@@ -143,7 +146,7 @@ class DistributionGenerator(object):
 			if self.canRunMoreOpsThisRound():
 				op, record = self.getOpAndRecord()
 				print ("Op is " + op + ". Record is " + str(record))
-				#self.applyOperation(op, record)
+				self.applyOperation(op, record)
 			else:
 				time.sleep(0.01) #sleep for 10ms to avoid busy waiting
 			
