@@ -103,7 +103,7 @@ class DistributionGenerator(object):
 		numKeysInMapping = self.getNumKeysInMapping()
 		recordNum = numKeysInMapping
 
-		insertPercentage = 10
+		insertPercentage = 20
 		insertDecide = int(random.uniform(0,100))
 
 		if insertDecide < insertPercentage:

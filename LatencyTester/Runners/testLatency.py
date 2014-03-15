@@ -12,7 +12,7 @@ from dbOpsHandler import DBOpsHandler
 from recordPreloader import RecordPreloader
 from recordGetter import RecordGetter
 from uniformDistributionGenerator import UniformDistributionGenerator
-from paretoDistributionGenerator import ParetoDistributionGenerator
+from latestDistributionGenerator import LatestDistributionGenerator
 from zipfDistributionGenerator import ZipfDistributionGenerator
 
 def getConfigFile(args):
@@ -51,8 +51,8 @@ distribution = config.getDistribution()
 workloadGenerator = None
 if distribution == "uniform":
 	workloadGenerator = UniformDistributionGenerator(client, config, dbOpsHandler, recordPreloader, extraRecordGetter)
-elif distribution == "pareto":
-	workloadGenerator = ParetoDistributionGenerator(client, config, dbOpsHandler, recordPreloader, extraRecordGetter)
+elif distribution == "latest":
+	workloadGenerator = LatestDistributionGenerator(client, config, dbOpsHandler, recordPreloader, extraRecordGetter)
 elif distribution == "zipf":
 	workloadGenerator = ZipfDistributionGenerator(client, config, dbOpsHandler, recordPreloader, extraRecordGetter)
 else:

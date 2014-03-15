@@ -23,8 +23,8 @@ class ZipfDistributionGenerator(DistributionGenerator):
 		currentIndex = self.getCurrentIndex()
 
 		if currentIndex == 0:
-			lower = 0
-			shape = 2   # the distribution shape parameter, also known as `a` or `alpha`
+			lower = -1
+			shape = 1.5   # the distribution shape parameter, also known as `a` or `alpha`
 			size = 1000000
 			upper = self.getConfig().getRangeEnd()
 
@@ -35,11 +35,11 @@ class ZipfDistributionGenerator(DistributionGenerator):
 		
 		numKeysInMapping = self.getNumKeysInMapping()
 		values = self.getValues()
-		
 		value = int(values[currentIndex])
-		value = numKeysInMapping - value
-		
+
 		self.incrementCurrentIndex()
 		return value
+
+
 
 
