@@ -66,7 +66,11 @@ class DBOpsHandler:
 		startTime = time.time()
 		try:
 			returnStatus = collection.update(query, update)
-			endTime = time.time()
+			if returnStatus.get("updatedExisting", False):
+				endTime = time.time()
+			else:
+				print "Operation Failure: Update Failure (No record updated)"
+				endTime = startTime - 100
 		except pymongo.errors.OperationFailure:
 			print "Operation Failure: Update Failure"
 			endTime = startTime - 100
